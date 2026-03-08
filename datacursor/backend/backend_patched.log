@@ -1,0 +1,105 @@
+INFO:     Will watch for changes in these directories: ['/Users/raghavendramachikatla/datallm/datacursor/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [41571] using WatchFiles
+INFO:     Started server process [41633]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+🚀 DataCursor Backend starting...
+INFO:     127.0.0.1:65443 - "POST /kernel/start HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65445 - "POST /kernel/start HTTP/1.1" 200 OK
+INFO:     ('127.0.0.1', 65480) - "WebSocket /ws/dc15c3a2-270b-46ca-8243-04035da5df55" [accepted]
+INFO:     connection open
+INFO:     ('127.0.0.1', 65502) - "WebSocket /ws/7971254c-377f-4c6f-924b-da211f72321b" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:65504 - "GET /settings/providers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65509 - "GET /settings/providers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65510 - "GET /settings/ollama/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65517 - "POST /settings/provider HTTP/1.1" 200 OK
+Model codellama not found. Falling back to qwen3-vl:4b
+INFO:     127.0.0.1:49178 - "POST /kernel/start HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49179 - "POST /kernel/start HTTP/1.1" 200 OK
+INFO:     ('127.0.0.1', 49253) - "WebSocket /ws/58b75edd-2a5a-4852-aab8-af23f756b0e0" [accepted]
+INFO:     connection open
+INFO:     ('127.0.0.1', 49299) - "WebSocket /ws/80a01934-a83b-4276-94ef-e8c65e3e86c0" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:49301 - "GET /settings/providers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49311 - "GET /settings/providers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49313 - "GET /settings/ollama/models HTTP/1.1" 200 OK
+Model codellama not found. Falling back to qwen3-vl:4b
+INFO:     127.0.0.1:49429 - "GET /settings/providers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49433 - "GET /settings/providers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49446 - "GET /settings/providers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49451 - "GET /settings/providers HTTP/1.1" 200 OK
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:49474 - "POST /kernel/start HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49476 - "POST /kernel/start HTTP/1.1" 200 OK
+INFO:     ('127.0.0.1', 49514) - "WebSocket /ws/6d1fb78d-7646-449e-998a-52a1d7ff24d8" [accepted]
+INFO:     connection open
+INFO:     ('127.0.0.1', 49536) - "WebSocket /ws/6bee1d1c-6dfd-4dce-b333-c3114e825fa8" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:49538 - "GET /settings/providers HTTP/1.1" 200 OK
+INFO:     connection closed
+INFO:     connection closed
+Model codellama not found. Falling back to qwen3-vl:4b
+INFO:     127.0.0.1:50830 - "POST /kernel/start HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50831 - "POST /kernel/start HTTP/1.1" 200 OK
+INFO:     ('127.0.0.1', 50875) - "WebSocket /ws/6949d64b-281b-412f-8692-cda35ed946c4" [accepted]
+INFO:     connection open
+INFO:     ('127.0.0.1', 50901) - "WebSocket /ws/c4acb476-e3ec-4d53-9de7-5a928972e9cd" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:50903 - "GET /settings/providers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50920 - "GET /settings/providers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50921 - "GET /settings/ollama/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51050 - "POST /settings/provider HTTP/1.1" 200 OK
+Model codellama not found. Falling back to qwen3-vl:4b
+INFO:     127.0.0.1:51252 - "POST /kernel/start HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51254 - "POST /kernel/start HTTP/1.1" 200 OK
+INFO:     ('127.0.0.1', 51308) - "WebSocket /ws/3be4c142-932f-4694-a9b2-eace914ecc4f" [accepted]
+INFO:     connection open
+INFO:     ('127.0.0.1', 51356) - "WebSocket /ws/372aa922-e7e3-4080-a6af-3449d31775ac" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:51358 - "GET /settings/providers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51433 - "GET /settings/providers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51434 - "GET /settings/ollama/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51533 - "POST /settings/provider HTTP/1.1" 200 OK
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+Model codellama not found. Falling back to qwen3-vl:4b
+Model codellama not found. Falling back to qwen3-vl:4b
+INFO:     127.0.0.1:53016 - "GET /settings/providers HTTP/1.1" 200 OK
+INFO:     connection closed
+INFO:     127.0.0.1:53070 - "POST /kernel/start HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53071 - "POST /kernel/start HTTP/1.1" 200 OK
+INFO:     ('127.0.0.1', 53119) - "WebSocket /ws/846a66ae-e3dd-49be-82b2-19c09e7d83f9" [accepted]
+INFO:     connection open
+INFO:     ('127.0.0.1', 53151) - "WebSocket /ws/4aec6c91-1612-4b23-b70e-cad2587f5bb4" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:53154 - "GET /settings/providers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53353 - "GET /settings/providers HTTP/1.1" 200 OK
+INFO:     connection closed
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:53471 - "POST /kernel/start HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53472 - "POST /kernel/start HTTP/1.1" 200 OK
+INFO:     ('127.0.0.1', 53518) - "WebSocket /ws/208a1a61-ab14-4bbe-87ca-bd324a451b6b" [accepted]
+INFO:     connection open
+INFO:     ('127.0.0.1', 53550) - "WebSocket /ws/da77cf1a-a3dd-4ad3-9241-ed3fd7d2332a" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:53552 - "GET /settings/providers HTTP/1.1" 200 OK
+[IPKernelApp] WARNING | Parent appears to have exited, shutting down.
+[IPKernelApp] WARNING | Parent appears to have exited, shutting down.
+[IPKernelApp] WARNING | Parent appears to have exited, shutting down.
+[IPKernelApp] WARNING | Parent appears to have exited, shutting down.
+[IPKernelApp] WARNING | Parent appears to have exited, shutting down.
+[IPKernelApp] WARNING | Parent appears to have exited, shutting down.
+[IPKernelApp] WARNING | Parent appears to have exited, shutting down.
+[IPKernelApp] WARNING | Parent appears to have exited, shutting down.
+[IPKernelApp] WARNING | Parent appears to have exited, shutting down.
+[IPKernelApp] WARNING | Parent appears to have exited, shutting down.
+[IPKernelApp] WARNING | Parent appears to have exited, shutting down.
+[IPKernelApp] WARNING | Parent appears to have exited, shutting down.
+[IPKernelApp] WARNING | Parent appears to have exited, shutting down.
+[IPKernelApp] WARNING | Parent appears to have exited, shutting down.

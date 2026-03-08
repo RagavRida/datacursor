@@ -1,0 +1,49 @@
+INFO:     Will watch for changes in these directories: ['/Users/raghavendramachikatla/datallm/datacursor/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [40607] using WatchFiles
+INFO:     Started server process [40669]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+🚀 DataCursor Backend starting...
+INFO:     127.0.0.1:64796 - "POST /kernel/start HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:64797 - "POST /kernel/start HTTP/1.1" 500 Internal Server Error
+INFO:     ('127.0.0.1', 64800) - "WebSocket /ws/undefined" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('127.0.0.1', 64803) - "WebSocket /ws/undefined" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:64805 - "GET /settings/providers HTTP/1.1" 200 OK
+INFO:     connection closed
+INFO:     127.0.0.1:64809 - "GET /settings/providers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64837 - "POST /kernel/start HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:64838 - "POST /kernel/start HTTP/1.1" 500 Internal Server Error
+INFO:     ('127.0.0.1', 64841) - "WebSocket /ws/undefined" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:64844 - "GET /settings/providers HTTP/1.1" 200 OK
+INFO:     ('127.0.0.1', 64846) - "WebSocket /ws/undefined" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:64850 - "GET /settings/providers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64867 - "GET /settings/providers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64868 - "GET /settings/ollama/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64875 - "POST /settings/provider HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64880 - "POST /kernel/start HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:64896 - "POST /kernel/start HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:64898 - "POST /kernel/start HTTP/1.1" 500 Internal Server Error
+INFO:     ('127.0.0.1', 64901) - "WebSocket /ws/undefined" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     ('127.0.0.1', 64904) - "WebSocket /ws/undefined" [accepted]
+INFO:     127.0.0.1:64906 - "GET /settings/providers HTTP/1.1" 200 OK
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:64910 - "GET /settings/providers HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'kernel_manager.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [40669]
+INFO:     Started server process [40724]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.

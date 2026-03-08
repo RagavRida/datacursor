@@ -1,0 +1,82 @@
+System Architecture: DataCursor — An AI-Native Autonomous Data Science Platform
+
+1. Abstract
+The field of automated data science has evolved from static code generation to interactive, context-aware reasoning systems. This paper presents the architecture of DataCursor, a hybrid neuro-symbolic system designed to function as both an autonomous data analyst and an AI-native Integrated Development Environment (IDE). Unlike traditional code co-pilots that rely solely on static text analysis, DataCursor implements a Kernel-Centric Architecture (KCA) where a Large Language Model (LLM) is tightly coupled with a persistent, stateful execution environment (Jupyter Kernel). This allows the system to ground its reasoning in runtime state—inspecting variable types, DataFrame shapes, and execution outputs—to minimize hallucination and maximize code correctness. Furthermore, the system adopts the Model Context Protocol (MCP) to modularize external tool access (e.g., Kaggle, HuggingFace) into distinct satellite services. We describe the system’s dual-loop control flow, real-time WebSocket communication protocols, and multi-provider LLM abstraction layer, demonstrating a scalable approach to next-generation AI coding assistants.
+
+2. System Overview
+DataCursor is a client-server application composed of three primary subsystems:
+1.  **The Neuro-Symbolic Core (Backend)**: A FastAPI-based orchestration engine that manages LLM inference, code execution, and tool orchestration.
+2.  **The Interactive Interface (Frontend)**: A React-based IDE that supports cell-based code execution, real-time visualization, and chat-based intent expression.
+3.  **The Execution Runtime**: An isolated Jupyter kernel pool that executes generated code and provides runtime introspection capabilities.
+
+The system operates in two modes:
+*   **Copilot Mode**: Interactive assistance where the AI suggests code based on the current cursor position and runtime context.
+*   **Autonomic Mode**: A LangGraph-based state machine that autonomously executes a five-stage data analysis pipeline (Ingest → Clean → Pattern Hunt → Visualize → Recommend).
+
+3. Architectural Design
+
+3.1 Component-Level Breakdown
+
+A. Frontend Layer (UI/UX)
+*   **Framework**: React 19 (Vite) with TypeScript.
+*   **State Management**: Local component state for editor content; WebSocket event-driven state for execution results.
+*   **Editor Engine**: Monaco Editor for code interaction.
+*   **Communication**: WebSocket connection for streaming tokens and execution outputs; REST API for file management and session control.
+
+B. Backend Orchestration Layer
+*   **Server**: FastAPI (Python) asynchronous server.
+*   **Connection Manager**: Handles WebSocket lifecycles (`ConnectionManager` class), routing messages between the UI and the Kernel.
+*   **LLM Manager**: A provider-agnostic abstraction layer (`LLMProvider` interface) supporting OpenAI, Anthropic, Google (Gemini), Groq, OpenRouter, and local Ollama models.
+*   **MCP Client**: Implements the Model Context Protocol to communicate with external tool servers via stdio.
+
+C. Execution Layer (Kernel)
+*   **Kernel Manager**: Wraps `jupyter_client` to spawn and manage IPython kernels.
+*   **Session Pool**: `KernelPool` maintains active sessions, allowing multi-user or multi-workspace isolation.
+*   **Context Extractor**: A specialized module that introspects the active kernel namespace `globals()` to extract metadata (variable names, types, DataFrame schemas) and inject them into the LLM context window.
+
+3.2 Data Flow
+1.  **Context Aggregation**: When a user request is received, the Backend requests a "Context Snapshot" from the `KernelManager`.
+2.  **Runtime Introspection**: The Kernel executes silent introspection code (e.g., `df.info()`, `type(x)`) to capture the current state of memory.
+3.  **Prompt Construction**: The `LLMManager` constructs a prompt combining:
+    *   System Persona ("Data Scientist").
+    *   User Intent.
+    *   Current Code Context (cursor position).
+    *   Runtime Context (variable metadata).
+    *   Project Context (file tree).
+4.  **Inference & Generation**: The LLM generates executable Python code.
+5.  **Execution & Feedback**: The code is sent to the Kernel. Results (stdout, stderr, plots) are streamed back to the Frontend via WebSocket.
+6.  **Self-Correction**: If execution fails, the error trace is fed back into the LLM for iterative debugging.
+
+4. Architectural Style
+The system follows a **Kernel-Centric, Event-Driven Micro-Modular Architecture**.
+*   **Kernel-Centric**: The "single source of truth" is not the file system, but the runtime memory state of the kernel.
+*   **Event-Driven**: All major state changes (execution start, result ready, AI token stream) are propagated as asynchronous events.
+*   **Micro-Modular**: Tool capabilities (Kaggle search, Dataset download) are encapsulated in separate processes interacting via the standardized MCP interface, decoupling the core engine from external API changes.
+
+5. Model Architecture
+DataCursor functions as a **Poly-Model System**, capable of dynamically switching between models based on task complexity or user preference:
+*   **Reasoning Models**: Gemini 1.5 Flash (default), GPT-4o, Claude 3.5 Sonnet (via APIs).
+*   **Local Inference**: Ollama integration for privacy-preserving or offline operations (supporting CodeLlama, Llama 3).
+*   **Model Persona**: The system injects a "Data Scientist" persona (`DATA_SCIENTIST_SYSTEM_PROMPT`) to enforce rigorous coding standards, comprehensive commenting, and defensive error handling.
+
+6. Security & Reliability Mechanisms
+*   **Sandboxed Execution**: Code runs in isolated Jupyter kernels. While currently local processes, the architecture supports containerization (Docker) per kernel for strict isolation.
+*   **Query Safety**: The `execute_sql_query` module implements a rudimentary firewall, blocking destructive keywords (`DROP`, `DELETE`, `TRUNCATE`) and allowing only `SELECT` operations.
+*   **Path Traversal Protection**: File management endpoints enforce `os.path.abspath` checks to ensure operations remain within the `WORKSPACE_DIR`.
+*   **Graceful Degradation**: The `LLMManager` includes fallback logic (e.g., falling back to a default Ollama model if the requested one is missing).
+
+7. Scalability Strategy
+*   **Vertical**: The `KernelPool` is designed to be asynchronous, allowing a single backend instance to manage multiple concurrent interactive sessions.
+*   **Horizontal**: The stateless nature of the REST API (excluding the Kernel mapping) allows for a load-balanced architecture where Kernel Sessions could be offloaded to a distributed cluster (e.g., JupyterHub or remote Kubernetes pods).
+*   **Modular Extension**: New capabilities are added as MCP Servers. This prevents the monolith from growing indefinitely; new tools are simply new sub-processes.
+
+8. Novel Contributions
+1.  **Runtime-Aware Context Injection**: Unlike standard RAG (Retrieval Augmented Generation) which retrieves static documents, DataCursor retrieves *dynamic memory state*. This allows the AI to "see" the data it is manipulating in real-time.
+2.  **MCP-First Tooling**: One of the first implementations of the Model Context Protocol to standardize tool access in a code interpreter environment.
+3.  **Hybrid Workflow**: Seamlessly bridging the gap between "One-click Analysis" (LangGraph agent) and "Interactive Coding" (IDE), acknowledging that real-world data science requires both automation and human intervention.
+
+9. Future Work Directions
+*   **Remote Kernel Orchestration**: Decoupling the Kernel execution from the backend server to support heavy workloads on GPU clusters.
+*   **Semantic RAG**: Integrating vector search over the codebase to provide "Project Context" beyond just the open files.
+*   **N-Shot Learning Store**: Caching successful execution patterns to fine-tune a smaller, local adapter model for lower latency and cost.
+*   **Collaborative Mode**: Extending the WebSocket protocol to support multi-user real-time collaboration in the same notebook session.

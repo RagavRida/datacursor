@@ -1,0 +1,37 @@
+INFO:     Will watch for changes in these directories: ['/Users/raghavendramachikatla/datallm/datacursor/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [40903] using WatchFiles
+INFO:     Started server process [40965]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+🚀 DataCursor Backend starting...
+INFO:     127.0.0.1:65131 - "POST /kernel/start HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65132 - "POST /kernel/start HTTP/1.1" 200 OK
+INFO:     ('127.0.0.1', 65166) - "WebSocket /ws/6a5cc1fa-709a-4922-b39a-f4884cc60206" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:65187 - "GET /settings/providers HTTP/1.1" 200 OK
+INFO:     ('127.0.0.1', 65189) - "WebSocket /ws/99c3043a-a22e-4715-b6d4-2589bbe8b3d3" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:65239 - "POST /kernel/start HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65240 - "POST /kernel/start HTTP/1.1" 200 OK
+INFO:     ('127.0.0.1', 65281) - "WebSocket /ws/f23176c3-c695-4e57-b259-423e2e629bf2" [accepted]
+INFO:     connection open
+INFO:     ('127.0.0.1', 65305) - "WebSocket /ws/8eda4645-4bc2-44d2-b430-ea1adedb9021" [accepted]
+INFO:     127.0.0.1:65306 - "GET /settings/providers HTTP/1.1" 200 OK
+INFO:     connection open
+INFO:     127.0.0.1:65381 - "GET /settings/providers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65382 - "GET /settings/ollama/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65390 - "POST /settings/provider HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65395 - "POST /settings/provider HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'llm_providers.py'. Reloading...
+INFO:     Shutting down
+INFO:     connection closed
+INFO:     connection closed
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [40965]
+INFO:     Started server process [41254]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.

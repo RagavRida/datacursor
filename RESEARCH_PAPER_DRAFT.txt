@@ -1,0 +1,51 @@
+
+DataCursor: A Kernel-Centric Neuro-Symbolic Architecture for Autonomous Data Science
+
+Author: Research Engineering Team
+Date: February 2026
+
+ABSTRACT
+ The rapid advancement of Large Language Models (LLMs) has catalyzed a shift from static code completion to autonomous agentic workflows. However, existing "Co-Pilot" solutions often suffer from hallucination and a lack of grounding in runtime state. This paper introduces **DataCursor**, a novel hybrid neuro-symbolic architecture that couples a high-inference LLM with a persistent, stateful Jupyter Kernel. By implementing a *Kernel-Centric Architecture (KCA)*, DataCursor enables the AI to introspect variable states, DataFrame schemas, and execution outputs in real-time, significantly reducing generation errors. Furthermore, we present a modular integration of the *Model Context Protocol (MCP)*, decoupling external tool execution (e.g., Kaggle, Hugging Face) from the core reasoning engine. We demonstrate that this dual-loop control system—combining symbolic execution with neural reasoning—provides a robust foundation for next-generation autonomous data science platforms.
+
+1. INTRODUCTION
+ Modern data science is an iterative process requiring constant context switching between code authorship, data inspection, and external resource retrieval. While LLMs have demonstrated proficiency in generating syntactic Python code, they lack "world models" of the specific runtime environment they operate within. An LLM blindly generating `df['price']` without knowing the DataFrame actually contains `df['Price_USD']` illustrates the fundamental limitation of text-based reasoning.
+
+ DataCursor addresses this by inverting the traditional IDE relationship. Instead of the editor being a passive text buffer, it acts as a window into a live Kernel Session. The AI agent is not merely a text generator but a privileged user of this kernel, capable of executing "silent" introspection commands to ground its reasoning before suggesting code.
+
+2. SYSTEM ARCHITECTURE
+
+ 2.1 Kernel-Centric Design Pattern
+ At the core of DataCursor is the `KernelManager`, which maintains a persistent `JupyterClient` session. Unlike stateless REST APIs, this session preserves memory state across user interactions. 
+
+ The **Context Extraction Pipeline** functions as follows:
+ 1. **Trigger**: A user request or code edit event.
+ 2. **Introspection**: The backend executes a silent payload (e.g., `%who_ls`, `df.info()`) to capture the current namespace.
+ 3. **Injection**: This metadata is structured into a ephemeral context window (variables, types, shapes) and injected into the LLM's system prompt.
+ 4. **Generation**: The LLM generates code that is syntactically correct and semantically valid for the current memory state.
+
+ 2.2 Micro-Modular Tooling via MCP
+ To prevent the core orchestration engine from becoming a monolithic dependency hell, DataCursor adopts the *Model Context Protocol (MCP)*. External capabilities are encapsulated as "Satellite IO" processes. 
+ - **Isolation**: Tools like `kaggle_mcp.py` run in separate processes, communicating via `stdio`.
+ - **Standardization**: A uniform JSON-RPC interface allows the LLM to discover and execute tools without knowledge of their underlying implementation.
+ - **Extensibility**: New tools can be hot-swapped without restarting the core server.
+
+3. METHODOLOGY
+
+ 3.1 Dual-Loop Control Flow
+ The system implements a dual-loop control architecture:
+ - **Inner Loop (Symbolic)**: The Python Kernel executes deterministic code, returning strict outputs (stdout, stderr). This loop guarantees correctness of execution.
+ - **Outer Loop (Neural)**: The LLM observes the Inner Loop's output. If an exception occurs (e.g., `KeyError`), the LLM catches the error trace, analyzes the available dictionary keys from the context, and re-generates the corrected code.
+
+ 3.2 Multi-Provider Abstraction
+ Recognizing the trade-offs between latency, cost, and reasoning power, DataCursor implements a `ProviderModel` abstraction. This allows dynamic routing:
+ - **Complex Reasoning**: Routed to GPT-4o or Claude 3.5 Sonnet.
+ - **High-Speed Completion**: Routed to Gemini 1.5 Flash.
+ - **Private/Offline**: LOCAL routing to Ollama (Llama 3).
+
+4. NOVEL CONTRIBUTIONS
+ 1. **Runtime-Aware Context Injection**: A mechanism to ground LLM generation in dynamic memory state rather than just static file analysis.
+ 2. **MCP-First IDE**: One of the first implementations of the Model Context Protocol directly within a code execution environment.
+ 3. **The "Data Scientist" Persona**: A system-prompt engineering framework that enforces defensive coding and clear documentation standards.
+
+5. FUTURE WORK
+ Future iterations will focus on **Remote Kernel Orchestration**, effectively decoupling the backend from the execution runtime to allow for Kubernetes-based scaling. Additionally, we aim to implement **Semantic RAG** over the entire codebase to provide project-wide context beyond the active notebook, enabling large-scale refactoring and architecture-aware suggestions.

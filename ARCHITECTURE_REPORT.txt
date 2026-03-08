@@ -1,0 +1,107 @@
+# ARCHITECTURE REPORT: DataCursor System
+# Generated on: 2026-02-18
+# Scope: Full Codebase Analysis
+
+## 1. SYSTEM METADATA
+- **Root Directory**: `datallm/datacursor`
+- **Primary Languages**: Python (Backend), TypeScript (Frontend)
+- **Frameworks**: FastAPI (Backend), React + Vite (Frontend)
+- **Architecture Style**: Client-Server, Kernel-Centric, Event-Driven
+
+## 2. DIRECTORY STRUCTURE MAP
+```
+datacursor/
+├── backend/
+│   ├── main.py                 # Application Entry Point & API Routes
+│   ├── kernel_manager.py       # Jupyter Kernel Lifecycle Management
+│   ├── mcp_client.py           # Model Context Protocol Implementation
+│   ├── llm_providers.py        # LLM Abstraction Layer
+│   ├── ai_bridge.py            # AI Code Generation Logic
+│   ├── database_manager.py     # Database Connection & Introspection
+│   ├── google_mcp.py           # MCP Server: Google Services
+│   ├── hf_mcp.py               # MCP Server: Hugging Face
+│   ├── kaggle_mcp.py           # MCP Server: Kaggle
+│   └── workspace/              # Local Execution Sandbox
+└── frontend/
+    ├── src/
+    │   ├── App.tsx             # Main UI Controller
+    │   └── components/         # UI Components
+    ├── vite.config.ts          # Build Configuration
+    └── package.json            # Dependency Manifest
+```
+
+## 3. BACKEND SUBSYSTEM SPECIFICATION
+
+### 3.1 Core Components
+1.  **Orchestration Engine** (`main.py`)
+    *   **Role**: FastAPI server, WebSocket router, Lifespan manager.
+    *   **Lifespan**: Initializes MCP servers (`kaggle`, `huggingface`) in background tasks.
+    *   **Middleware**: CORS (allowing all origins).
+
+2.  **Kernel Management** (`kernel_manager.py`)
+    *   **Class**: `KernelSession`
+        *   Wraps `jupyter_client.KernelManager`.
+        *   Capabilities: `start()`, `shutdown()`, `execute()`, `interrupt()`.
+        *   Feature: `get_context()` extracts variables, dataframes, and specific runtime state from the kernel.
+    *   **Class**: `KernelPool`
+        *   Manages lifecycle of multiple `KernelSession` instances mapped to `session_id`.
+
+3.  **LLM Integation** (`llm_providers.py`)
+    *   **Interface**: `LLMProvider` (Abstract Base Class).
+    *   **Implementations**:
+        *   `OpenAIProvider` (`gpt-4o`)
+        *   `AnthropicProvider` (`claude-3-5-sonnet`)
+        *   `GoogleProvider` (`gemini-1.5-flash`)
+        *   `GroqProvider` (`llama-3.3-70b`)
+        *   `OllamaProvider` (Local inference)
+        *   `OpenRouterProvider`
+    *   **Manager**: `LLMManager` handles active provider switching and configuration.
+
+4.  **Tooling & Protocol** (`mcp_client.py`)
+    *   **Class**: `McpClient`
+    *   **Protocol**: Connects to "Satellite" Python scripts via `stdio`.
+    *   **Function**: Discovery and execution of tools (`call_tool`).
+
+5.  **Database Layer** (`database_manager.py`)
+    *   **Supported Dialects**: PostgreSQL, MySQL, SQLite, Snowflake.
+    *   **Functions**: Connection pooling (`sqlalchemy`), Schema introspection, Read-only query preview.
+
+### 3.2 Data Structures
+*   **API Models (Pydantic)**:
+    *   `KernelStartRequest`: `{ session_id: Optional[str] }`
+    *   `ExecuteRequest`: `{ session_id, code, cell_id }`
+    *   `AIRequest`: `{ session_id, prompt, current_code, cell_id }`
+    *   `AIResponse`: `{ success, code, diff, error }`
+    *   `DatabaseConnectRequest`: `{ type, host, port, user, password, database, ... }`
+
+### 3.3 Communication Interfaces
+
+#### REST API Endpoints
+*   **POST** `/kernel/start` -> `KernelStartResponse`
+*   **POST** `/kernel/execute` -> Execution Result
+*   **POST** `/ai/complete` -> `AIResponse`
+*   **GET** `/files/list` -> JSON File Tree
+*   **POST** `/db/connect` -> Status
+
+#### WebSocket Protocol (`/ws/{session_id}`)
+*   **Inbound Messages**:
+    *   `execute`: Run code snippet.
+    *   `ai_request`: Generate code completion.
+    *   `interrupt`: Stop execution.
+    *   `get_context`: Request runtime state.
+*   **Outbound Messages**:
+    *   `execution_started`
+    *   `execution_result`: `{ cellId, status, outputs, error }`
+    *   `ai_response`: `{ code, diff, explanation }`
+    *   `context`: `{ variables, dataframes, imports }`
+
+## 4. FRONTEND SUBSYSTEM SPECIFICATION
+
+### 4.1 Tech Stack
+*   **Language**: TypeScript
+*   **Build Tool**: Vite
+*   **UI Library**: React
+
+## 5. EXTERNAL DEPENDENCIES
+*   **Python**: `fastapi`, `uvicorn`, `jupyter_client`, `pandas`, `sqlalchemy`, `langchain-google-genai`, `httpx`.
+*   **MCP**: Custom implementation using `stdio` communication with Python scripts.

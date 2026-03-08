@@ -1,0 +1,29 @@
+id,product_name,category,price,quantity_sold,revenue,customer_rating,region,date,discount_pct
+1,Laptop Pro,Electronics,1299.99,150,194998.5,4.5,North,2024-01-15,10
+2,Wireless Mouse,Electronics,29.99,500,14995,4.2,South,2024-01-20,0
+3,Office Chair,Furniture,249.99,80,19999.2,4.0,East,2024-01-25,15
+4,Standing Desk,Furniture,599.99,45,26999.55,4.7,West,2024-02-01,5
+5,Monitor 27",Electronics,399.99,120,47998.8,4.3,North,2024-02-10,
+6,Keyboard Mechanical,Electronics,89.99,300,26997,4.6,South,2024-02-15,0
+7,Webcam HD,Electronics,79.99,200,15998,,East,2024-02-20,10
+8,Desk Lamp,Furniture,39.99,150,5998.5,3.9,West,2024-02-28,0
+9,Laptop Pro,Electronics,1299.99,180,233998.2,4.5,North,2024-03-05,12
+10,USB Hub,Electronics,24.99,400,9996,4.1,South,2024-03-10,0
+11,Ergonomic Mouse,Electronics,59.99,250,,4.4,East,2024-03-15,5
+12,File Cabinet,Furniture,149.99,60,8999.4,3.8,West,2024-03-20,20
+13,Noise Cancelling Headphones,Electronics,299.99,100,29999,4.8,North,2024-03-25,0
+14,Laptop Stand,Furniture,49.99,180,8998.2,4.2,South,2024-04-01,0
+15,External SSD 1TB,Electronics,129.99,220,28597.8,4.6,East,2024-04-05,10
+16,Office Chair,Furniture,249.99,95,23749.05,4.1,West,2024-04-10,15
+17,Wireless Charger,Electronics,34.99,350,12246.5,4.0,North,2024-04-15,0
+18,Desk Organizer,Furniture,19.99,400,7996,3.7,South,2024-04-20,0
+19,Laptop Pro,Electronics,1299.99,200,259998,4.6,East,2024-04-25,8
+20,Monitor 27",Electronics,399.99,140,55998.6,4.4,West,2024-05-01,5
+21,Keyboard Mechanical,Electronics,89.99,280,25197.2,,North,2024-05-05,0
+22,Standing Desk,Furniture,599.99,55,32999.45,4.8,South,2024-05-10,0
+23,Webcam HD,Electronics,79.99,180,14398.2,4.1,East,2024-05-15,10
+24,USB Hub,Electronics,24.99,450,11245.5,4.0,West,2024-05-20,0
+25,Desk Lamp,Furniture,39.99,170,6798.3,4.0,North,2024-05-25,5
+26,Laptop Pro,Electronics,1299.99,150,194998.5,4.5,South,2024-01-15,10
+27,Wireless Mouse,Electronics,29.99,500,14995,4.2,East,2024-01-20,0
+28,Office Chair,Furniture,249.99,80,19999.2,4.0,West,2024-01-25,15

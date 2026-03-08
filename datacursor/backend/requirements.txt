@@ -1,0 +1,34 @@
+# Backend Dependencies
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+websockets>=12.0
+jupyter-client>=8.6.0
+ipykernel>=6.27.0
+python-dotenv>=1.0.0
+httpx>=0.27.0
+
+# LLM Providers
+langchain-google-genai>=1.0.0
+openai>=1.0.0
+anthropic>=0.30.0
+mcp>=0.1.0
+
+# Kaggle
+kaggle>=1.6.0
+
+# Hugging Face
+huggingface_hub>=0.20.0
+datasets>=2.16.0
+
+# Google Cloud
+google-cloud-bigquery>=3.15.0
+db-dtypes>=1.2.0
+
+# Database
+sqlalchemy>=2.0.0
+psycopg2-binary>=2.9.0
+pymysql>=1.1.0
+snowflake-connector-python>=3.6.0
+
+# Utilities
+pydantic>=2.5.0
